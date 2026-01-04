@@ -39,29 +39,29 @@ export default function Blogs() {
   }
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10">
+    <div className="mx-auto max-w-7xl px-4 py-8 md:py-10">
       <h1 className="mb-6 text-2xl font-semibold text-zinc-100">Explore Articles</h1>
       <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <select className="rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={language} onChange={(e)=>{setLanguage(e.target.value);updateParam("language", e.target.value);}}>
+        <select className="w-full min-w-0 rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={language} onChange={(e)=>{setLanguage(e.target.value);updateParam("language", e.target.value);}}>
           <option value="all">All Languages</option>
           {languages.map(l => <option key={l} value={l}>{l}</option>)}
         </select>
-        <select className="rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={topic} onChange={(e)=>{setTopic(e.target.value);updateParam("topic", e.target.value);}}>
+        <select className="w-full min-w-0 rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={topic} onChange={(e)=>{setTopic(e.target.value);updateParam("topic", e.target.value);}}>
           <option value="all">All Topics</option>
           {topics.map(t => <option key={t} value={t}>{t}</option>)}
         </select>
-        <select className="rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={difficulty} onChange={(e)=>{setDifficulty(e.target.value);updateParam("difficulty", e.target.value);}}>
+        <select className="w-full min-w-0 rounded-lg border border-white/10 bg-zinc-900 p-2 text-sm text-zinc-200" value={difficulty} onChange={(e)=>{setDifficulty(e.target.value);updateParam("difficulty", e.target.value);}}>
           <option value="all">All Difficulty</option>
           {['Beginner','Intermediate','Advanced'].map(d => <option key={d} value={d}>{d}</option>)}
         </select>
-        <Link to="/" className="rounded-lg border border-white/10 bg-zinc-900 p-2 text-center text-sm text-zinc-200 hover:bg-zinc-800">Reset</Link>
+        <Link to="/" className="w-full rounded-lg border border-white/10 bg-zinc-900 p-2 text-center text-sm text-zinc-200 hover:bg-zinc-800">Reset</Link>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
         {items.map(p => <BlogCard key={p.id} post={p} />)}
       </div>
 
-      <div className="mt-8 flex items-center justify-center gap-2">
+      <div className="mt-8 flex flex-wrap items-center justify-center gap-2">
         <button disabled={page<=1} onClick={()=>{setPage(p=>p-1);setParams({...Object.fromEntries(params), page: String(page-1)})}} className="rounded border border-white/10 px-3 py-1 text-sm text-zinc-200 disabled:opacity-50">Prev</button>
         <span className="text-sm text-zinc-400">Page {page} of {totalPages}</span>
         <button disabled={page>=totalPages} onClick={()=>{setPage(p=>p+1);setParams({...Object.fromEntries(params), page: String(page+1)})}} className="rounded border border-white/10 px-3 py-1 text-sm text-zinc-200 disabled:opacity-50">Next</button>
