@@ -4,11 +4,8 @@ import { useTheme } from "../context/ThemeContext";
 
 const nav = [
   { to: "/courses", label: "Courses" },
-  { to: "/tutorials", label: "Tutorials" },
-  { to: "/practice", label: "Practice" },
-  { to: "/blogs", label: "Blogs" },
-  { to: "/notes", label: "Notes" },
-  { to: "/jobs", label: "Jobs" },
+  { to: "/blogs", label: "Blog" },
+  { to: "/projects", label: "Projects" },
 ];
 
 export default function Navbar() {
@@ -28,6 +25,7 @@ export default function Navbar() {
           {/* Right controls (mobile only) */}
           <div className="col-span-6 flex items-center justify-end gap-2 md:hidden">
             <button aria-label="Toggle theme" onClick={toggle} className="rounded-full border border-zinc-300 p-2 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900">{theme === "dark" ? "🌙" : "☀️"}</button>
+            <button aria-label="Search" className="rounded-full border border-zinc-300 p-2 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900">🔍</button>
             <Link to="/auth" className="rounded-full bg-emerald-600 px-3 py-1.5 text-sm text-white hover:bg-emerald-500">Sign In</Link>
           </div>
 
@@ -38,6 +36,17 @@ export default function Navbar() {
             </div>
           </div>
 
+          {/* Mobile nav links (horizontal scroll) */}
+          <div className="order-4 col-span-12 md:hidden">
+            <nav className="mt-1 flex gap-4 overflow-x-auto whitespace-nowrap py-1 text-sm">
+              {nav.map((n) => (
+                <NavLink key={n.to} to={n.to} className={({ isActive }) => `${isActive ? "text-emerald-400" : "text-zinc-400"} hover:text-zinc-200`}>
+                  {n.label}
+                </NavLink>
+              ))}
+            </nav>
+          </div>
+
           {/* Desktop nav */}
           <nav className="col-span-12 hidden items-center justify-end gap-4 md:col-span-4 lg:col-span-5 md:flex">
             {nav.map((n) => (
@@ -45,6 +54,7 @@ export default function Navbar() {
                 {n.label}
               </NavLink>
             ))}
+            <button aria-label="Search" className="rounded-full border border-zinc-300 p-2 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900">🔍</button>
             <button aria-label="Toggle theme" onClick={toggle} className="rounded-full border border-zinc-300 p-2 text-zinc-700 hover:bg-zinc-100 dark:border-zinc-700 dark:text-zinc-200 dark:hover:bg-zinc-900">
               {theme === "dark" ? "🌙" : "☀️"}
             </button>
